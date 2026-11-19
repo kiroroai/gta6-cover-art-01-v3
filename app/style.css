@@ -1,0 +1,88 @@
+/* Neon Vice Cover Maker — original styling, no external assets. */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #160a24;
+  color: #fdf3e3;
+  min-height: 100vh;
+}
+#topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; background: #241038; border-bottom: 3px solid #ff9a3d;
+  position: sticky; top: 0; z-index: 5;
+}
+#brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 1px; }
+#brand-mark {
+  background: linear-gradient(135deg, #ff5e8a, #ff9a3d);
+  color: #1c0b2e; padding: 4px 9px; border-radius: 6px; font-size: 15px;
+}
+#brand-name { font-size: 15px; }
+#view-tabs { display: flex; gap: 8px; }
+.tab {
+  background: #3a1c5c; color: #fdf3e3; border: 1px solid #6b3fa0;
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 13px;
+}
+.tab.active { background: #ff9a3d; color: #241038; border-color: #ff9a3d; }
+.view { display: none; }
+.view.active { display: block; }
+
+/* Cover view: artwork full-bleed, edge to edge */
+#view-cover.active { display: block; line-height: 0; }
+#cover-art { width: 100vw; height: 100vh; object-fit: contain; background: #000; display: block; }
+body[data-view="cover"] #topbar { display: none; }
+body[data-view="cover"] { background: #000; }
+
+/* Editor */
+#editor-layout { display: flex; gap: 18px; padding: 16px 18px; align-items: flex-start; }
+#stage-wrap { flex: 0 0 auto; }
+#stage {
+  width: min(62vh, 640px); height: min(62vh, 640px);
+  border: 3px solid #ff9a3d; border-radius: 8px; background: #000; cursor: grab; touch-action: none;
+}
+#stage-hint { color: #d9c7f2; font-size: 13px; max-width: 640px; }
+#controls {
+  flex: 1 1 auto; background: #241038; border: 1px solid #4b2673;
+  border-radius: 10px; padding: 14px 16px; min-width: 300px;
+}
+#controls-title { margin: 0 0 10px; font-size: 19px; }
+.field { display: block; margin: 12px 0; font-size: 13px; font-weight: 700; color: #ffd9a8; }
+.field input[type="text"] {
+  width: 100%; margin-top: 5px; padding: 8px; border-radius: 6px;
+  border: 1px solid #6b3fa0; background: #160a24; color: #fdf3e3; font-size: 15px;
+}
+.field input[type="file"] { display: block; margin-top: 6px; color: #fdf3e3; }
+.field input[type="range"] { width: 100%; margin-top: 6px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.row button, #export-btn, #panel-buttons button {
+  background: #3a1c5c; color: #fdf3e3; border: 1px solid #6b3fa0;
+  border-radius: 7px; padding: 8px 11px; cursor: pointer; font-weight: 700; font-size: 13px;
+}
+.row button.active, #panel-buttons button.active { background: #ff5e8a; border-color: #ff5e8a; color: #fff; }
+#panel-buttons { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 4px; }
+#panel-label { font-size: 13px; color: #d9c7f2; margin: 10px 0 0; }
+#export-btn { background: #ff9a3d; color: #241038; border-color: #ff9a3d; width: 100%; font-size: 15px; padding: 11px; }
+#export-note { font-size: 12px; color: #b9a3d9; }
+
+/* Details */
+#view-details { padding: 18px; }
+#details-title { margin: 4px 0; font-size: 26px; }
+#details-sub { color: #d9c7f2; margin: 0 0 16px; }
+#details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.crop-card { margin: 0; background: #241038; border: 1px solid #4b2673; border-radius: 10px; overflow: hidden; }
+.crop-frame { height: 300px; overflow: hidden; position: relative; background: #000; }
+.crop-img { position: absolute; max-width: none; }
+/* Each crop scales the full artwork and offsets it so one panel fills the frame. */
+.crop-duo  { width: 260%; left: -38%; top: -58%; }
+.crop-car  { width: 220%; left: -116%; top: -44%; }
+.crop-heli { width: 220%; left: -122%; top: -118%; }
+.crop-boat { width: 220%; left: 0%; top: -232%; }
+.crop-card figcaption { padding: 10px 12px; font-weight: 700; font-size: 14px; }
+
+/* Back cover */
+#back-layout { display: flex; gap: 22px; padding: 22px; align-items: flex-start; }
+#back-art { width: 46%; border: 3px solid #ff9a3d; border-radius: 8px; }
+#back-text { flex: 1; }
+#back-title { font-size: 34px; margin: 2px 0 10px; letter-spacing: 1px; }
+#back-blurb { font-size: 16px; line-height: 1.55; color: #f3e6ff; }
+#back-points { line-height: 1.7; color: #ffd9a8; padding-left: 20px; }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Vice — GTA-Style Cover Art Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <div id="brand"><span id="brand-mark">NV</span><span id="brand-name">NEON VICE COVER MAKER</span></div>
+  <nav id="view-tabs">
+    <button type="button" class="tab" data-view="cover" id="tab-cover">Cover</button>
+    <button type="button" class="tab" data-view="editor" id="tab-editor">Editor</button>
+    <button type="button" class="tab" data-view="details" id="tab-details">Details</button>
+    <button type="button" class="tab" data-view="back" id="tab-back">Back Cover</button>
+  </nav>
+</header>
+
+<main>
+  <!-- View 1: the featured artwork, full-bleed at its native 4:3 -->
+  <section id="view-cover" class="view">
+    <img id="cover-art" src="cover.jpg" alt="Featured cover artwork: two protagonists back to back above a multi-panel Vice City collage">
+  </section>
+
+  <!-- Editor view: the cover maker at work -->
+  <section id="view-editor" class="view">
+    <div id="editor-layout">
+      <div id="stage-wrap">
+        <canvas id="stage" width="1080" height="1080"></canvas>
+        <p id="stage-hint">Click a panel to select it, drag inside it to position the photo, use Zoom to fill it your way.</p>
+      </div>
+      <aside id="controls">
+        <h2 id="controls-title">Make your cover</h2>
+
+        <label class="field" id="field-photo">
+          <span>Add your photo (stays on this device)</span>
+          <input type="file" id="photo-input" accept="image/*">
+        </label>
+        <div class="row">
+          <button type="button" id="fill-all-btn">Fill all panels with this photo</button>
+          <button type="button" id="sample-btn">Use featured artwork</button>
+        </div>
+
+        <p id="panel-label">Selected panel: <strong id="selected-panel-name">Hero</strong></p>
+        <div id="panel-buttons"></div>
+
+        <label class="field" id="field-zoom">
+          <span>Zoom in selected panel</span>
+          <input type="range" id="zoom-slider" min="100" max="350" value="100">
+        </label>
+
+        <label class="field" id="field-title">
+          <span>Title</span>
+          <input type="text" id="title-input" value="NEON VICE" maxlength="24">
+        </label>
+        <label class="field" id="field-caption">
+          <span>Caption</span>
+          <input type="text" id="caption-input" value="One city. Every temptation." maxlength="48">
+        </label>
+
+        <div class="field" id="field-grade">
+          <span>Colour grade</span>
+          <div class="row" id="grade-buttons">
+            <button type="button" class="grade" data-grade="sunset" id="grade-sunset">Sunset</button>
+            <button type="button" class="grade" data-grade="neon" id="grade-neon">Neon</button>
+            <button type="button" class="grade" data-grade="noir" id="grade-noir">Noir</button>
+          </div>
+        </div>
+
+        <div class="field" id="field-format">
+          <span>Export size</span>
+          <div class="row" id="format-buttons">
+            <button type="button" class="format" data-format="square" id="fmt-square">1080 × 1080</button>
+            <button type="button" class="format" data-format="portrait" id="fmt-portrait">1080 × 1350</button>
+            <button type="button" class="format" data-format="wide" id="fmt-wide">1920 × 1080</button>
+          </div>
+        </div>
+        <button type="button" id="export-btn">Export PNG</button>
+        <p id="export-note">Exports render at full size on a hidden canvas — nothing is uploaded, ever.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Details view: zoomed crops of the featured artwork's own panels -->
+  <section id="view-details" class="view">
+    <h2 id="details-title">Inside the artwork</h2>
+    <p id="details-sub">Zoomed details cropped live from the featured cover itself — the duo, the machine, the sky and the swamp.</p>
+    <div id="details-grid">
+      <figure class="crop-card" id="crop-duo">
+        <div class="crop-frame"><img class="crop-img crop-duo" src="cover.jpg" alt="Crop of the two protagonists back to back"></div>
+        <figcaption>The Duo — back to back, city at their feet</figcaption>
+      </figure>
+      <figure class="crop-card" id="crop-car">
+        <div class="crop-frame"><img class="crop-img crop-car" src="cover.jpg" alt="Crop of the supercar panel"></div>
+        <figcaption>The Supercar — low, loud, unmistakable</figcaption>
+      </figure>
+      <figure class="crop-card" id="crop-heli">
+        <div class="crop-frame"><img class="crop-img crop-heli" src="cover.jpg" alt="Crop of the helicopter over the skyline"></div>
+        <figcaption>The Skyline — a helicopter over downtown towers</figcaption>
+      </figure>
+      <figure class="crop-card" id="crop-boat">
+        <div class="crop-frame"><img class="crop-img crop-boat" src="cover.jpg" alt="Crop of the airboat and alligator panel"></div>
+        <figcaption>The Swamp — airboat country, alligator included</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Back cover view -->
+  <section id="view-back" class="view">
+    <div id="back-layout">
+      <img id="back-art" src="cover.jpg" alt="The featured cover artwork, shown small">
+      <div id="back-text">
+        <h2 id="back-title">NEON VICE</h2>
+        <p id="back-blurb">Two leads stand back to back over a city of panels: a supercar under palm light, a helicopter crossing the downtown sky, an airboat running swamp water past an alligator, a beach in full party swing and a speedboat circling the ferris wheel. This maker lets you step into that collage — drop in your own photo, slide it across the panels, set your title, pick a sunset, neon or noir grade, and export a cover ready to post.</p>
+        <ul id="back-points">
+          <li>Your photos, your panels — one photo everywhere, or a different one per panel</li>
+          <li>Drag and zoom each panel until the shot sits right</li>
+          <li>Exports at 1080 × 1080, 1080 × 1350 and 1920 × 1080</li>
+          <li>Runs fully offline; photos never leave your machine</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="src/editor.js"></script>
+</body>
+</html>
